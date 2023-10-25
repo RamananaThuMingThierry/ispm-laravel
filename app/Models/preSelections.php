@@ -17,6 +17,4 @@ class preSelections extends Model
         "facebookID",
         "documents",
     ];
-
-    protected $timestamps = false;
 }
