@@ -8,6 +8,7 @@ use App\Http\Controllers\API\DepartementController;
 use App\Http\Controllers\API\EtudiantsController;
 use App\Http\Controllers\API\FilieresController;
 use App\Http\Controllers\API\HistoriqueController;
+use App\Http\Controllers\API\PreSelectionsController;
 use App\Models\preSelections;
 
 Route::post('login', [AuthController::class, 'login']);
@@ -50,11 +51,11 @@ Route::middleware(['auth:sanctum', 'isAPIAdmin'])->group(function(){
     Route::post('delete_pre_selection/{id}', [HistoriqueController::class, 'destroy']); // Supprimer une pré-séléction
    
     // Pré-séléctionner
-    Route::get('historiques', [preSelections::class, 'index']); // Afficher toutes les historiques    
-    Route::post('store-historiques', [preSelections::class, 'store']);   // Créer une historique
-    Route::get('edit-historiques/{id}', [preSelections::class, 'edit']); // Modifier une historique
-    Route::post('update-historiques/{id}', [preSelections::class, 'update']); // Modifier une historique
-    Route::post('delete-historiques/{id}', [preSelections::class, 'destroy']); // Supprimer une historique
+    Route::get('historiques', [PreSelectionsController::class, 'index']); // Afficher toutes les historiques    
+    Route::post('store-historiques', [PreSelectionsController::class, 'store']);   // Créer une historique
+    Route::get('edit-historiques/{id}', [PreSelectionsController::class, 'edit']); // Modifier une historique
+    Route::post('update-historiques/{id}', [PreSelectionsController::class, 'update']); // Modifier une historique
+    Route::post('delete-historiques/{id}', [PreSelectionsController::class, 'destroy']); // Supprimer une historique
 
     // Etudiants
     Route::get('etudiants', [EtudiantsController::class, 'index']); // Afficher toutes les étudiants    

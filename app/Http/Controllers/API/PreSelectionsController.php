@@ -53,10 +53,10 @@ class PreSelectionsController extends Controller
             }
 
             DB::table('pre_selections')->insert([
-                'nom_complet' => $request->nom,
+                'nom_complet' => $request->nom_complet,
                 'contact' => $request->contact,
                 'facebookID' => $request->facebookID,
-                'document' => $documents
+                'documents' => $documents
             ]);
             
             return response()->json([
