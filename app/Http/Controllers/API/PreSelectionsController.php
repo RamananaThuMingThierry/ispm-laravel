@@ -31,7 +31,7 @@ class PreSelectionsController extends Controller
             'nom_complet' => 'required',
             'contact' => 'required',
             'facebookID' => 'required',
-            'documents' => 'required'
+            'documents' => 'required|mimes:pdf|max:2048'
         ]);
 
         if($validator->fails()){
@@ -42,11 +42,21 @@ class PreSelectionsController extends Controller
 
         }else{
             
+            if ($request->hasFile('pdf')) {
+                $file = $request->file('pdf');
+                $fileName = time().'.'.$file->getClientOriginalExtension();
+                $destinationPath = public_path('/uploads/pdf');
+                $file->move($destinationPath, $fileName);
+                $documents = $file;
+            } else {
+                $documents = null;
+            }
+
             DB::table('pre_selections')->insert([
                 'nom_complet' => $request->nom,
                 'contact' => $request->contact,
                 'facebookID' => $request->facebookID,
-                'document' => $request->documents
+                'document' => $documents
             ]);
             
             return response()->json([
