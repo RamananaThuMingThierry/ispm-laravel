@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Models\preSelections;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
@@ -39,14 +40,14 @@ class PreSelectionsController extends Controller
             ]);
 
         }else{
-             
-            $preSelections = new preSelections();
-
-            $preSelections->nom = $request->nom;
-            $preSelections->contact = $request->contact;
-            $preSelections->documents = $request->documents;
-            $preSelections->save();
-
+            
+            DB::table('pre_selections')->insert([
+                'nom_complet' => $request->nom,
+                'contact' => $request->contact,
+                'facebookID' => $request->facebookID,
+                'document' => $request->documents
+            ]);
+            
             return response()->json([
                 'status' => 200,
                 'message' => 'Enregistrement effectuée!',
