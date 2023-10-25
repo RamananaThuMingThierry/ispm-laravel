@@ -28,9 +28,10 @@ class PreSelectionsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nom' => 'required',
-            'contact' => 'required|date',
-            'documents' => 'required|date'
+            'nom_complet' => 'required',
+            'contact' => 'required',
+            'facebookID' => 'required',
+            'documents' => 'required'
         ]);
 
         if($validator->fails()){
